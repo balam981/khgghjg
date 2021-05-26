@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var A, B, C, x1, x2;
+        function procesoEcuacion()
+        {
+            obtenerDatos();
+            obtenerEcuacion();
+            presentarDatos();
+        }
+        function obtenerDatos()
+        {
+            A = parseFloat(document.getElementById("inputA").value);
+            B = parseFloat(document.getElementById("inputB").value);
+            C = parseFloat(document.getElementById("inputC").value);
+            //alert("Los datos fueron introducidos");
+            if (isNaN(A)==true || isNaN(B) == true || isNaN(C) == true)
+            {
+                alert("No se introdujo ninguna variable")
+                throw new Error("No se introdujo ninguna variable")
+            }
+        }
+        function obtenerEcuacion()
+        {
+            var r=((B*B)-(4*A*C));
+            if(r<0)
+            {
+                let aux1,aux2;
+                aux1 = (-B/(2*A));
+                aux2= Math.sqrt(-r)/(2*A);
+                x1=aux1.toString()+"+"+aux2.toString()+"i";
+                x2=aux1.toString()+"-"+aux2.toString()+"i";
+            }
+            else
+            {
+                x1=(-B + Math.sqrt(r))/(2*A);
+                x1=x1.toString();
+                x2=(-B - Math.sqrt(r))/(2*A);
+                x2=x2.toString();
+            }
+        }
+        function presentarDatos()
+        {
+           // let text="<div class='row'> <div class='col'>X1: <br>";
+            let texto = '<table class="table table-striped table-borderless table-primary">';
+                texto += "<thead>";
+                  texto += "<tr>";
+                    texto += `<th> X1 </th>`;
+                    texto += `<th> X2 </th>`;
+                    texto += "</tr>";
+                  texto += "</thead>";
+                texto += "<tbody>";
+
+                    texto += "<tr>";
+        texto += `<td>${x1}</td>`;
+        texto += `<td>${x2}</td>`; 
+        texto += "</tr>";
+           // text += x1;
+            //text += "</div><div class='col'>X2:<br>";
+            //text += x2;
+            //text += "</div>";
+
+            texto += "</tbody>";
+    texto += "</table>"; 
+            document.getElementById("ContenedorResultados").innerHTML=texto;
+        }
+    </script>
+   
+    <title>Ecuaciones de Segundo Grado</title>
+</head>
+<body>
+    <div class="container bg-dark text-white text-center">
+        <h1>Solución de Ecuaciones de Segundo Grado</h1>
+    </div>
+    
+    <div class="container p-20 mb-20 bg-success py-1 text-white">
+        <form>
+            <div class="row">
+                <div class="col sm-3">
+                    Ax<sup>2</sup><br>
+                    <input type="text" id="inputA" value=""><br>
+                </div>
+                <div class="col sm-1"><br>+</div>
+                <div class="col sm-3">
+                    Bx <br>
+                    <input type="text" id="inputB" value=""><br>
+                    
+                </div>
+                <div class="col sm-1"><br>+</div>
+                <div class="col sm-3">
+                    C<br>
+                    <input type="text" id="inputC" value=""><br>
+                </div>
+                <div class="col sm-1"><br>=</div>
+                <div class="col sm-3"><br>0</div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <input type="button" value="Calcular" onclick="procesoEcuacion()">
+                </div>
+                <div class="col">
+                    <input type="reset" onclick="location.reload()">
+                </div>
+            </div><br>
+        </form>
+        <br>
+        <br>
+        <div class="container p-20 mb-20 bg-success py-1 text-white">
+            <div class="row">
+            <div class="col-1 bg-success">
+                
+            </div>
+            <div class="col-10 bg-dark">
+                <div id = 'ContenedorResultados'>
+              </div>    
+            </div>
+            <div class="col-1 bg-success">
+                        
+            </div>
+          </div>
+          
+          </div>
+          
+    </div>
+
+   
+    
+        <!-- 
+        <div class="row">
+            <div class="col"><label id="printx1"></label></div>
+            <div class="col"><label id="printx2"></label></div>
+        </div>
+        -->
+    </div>
+    
+</body>
+</html>
